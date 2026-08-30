@@ -1,0 +1,15 @@
+﻿myproject_env/
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.exe
+dataset/
+encodings/
+attendance/
+key.txt
+*.sqlite
+*.pkl
+
+student_cnn_model.keras
