@@ -1,0 +1,1 @@
+"C:\Users\AppData\Roaming\Python\Python311\Scripts\streamlit.exe" run "project(1).py"
