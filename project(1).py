@@ -58,6 +58,11 @@ def train_or_load_model():
     else:
         model, class_indices = train_model()
 
+    # --- New safety check ---
+    if model is None or class_indices is None:
+        logger.error("Model training failed due to missing or invalid training data. Please ensure the 'students/' directory exists with images.")
+        raise SystemExit("Exiting program because the model could not be trained.")
+
     return model, class_indices
 
 def train_model():
@@ -230,7 +235,13 @@ def main():
         st.session_state.webcam_running = False
 
     initialize_database()
-    model, class_indices = train_or_load_model()
+
+    # Try loading or training the model; stop if it fails
+    try:
+        model, class_indices = train_or_load_model()
+    except SystemExit as e:
+        st.error(str(e))
+        return  # Stop running the app if model is not ready
 
     if st.button("Start Webcam"):
         st.session_state.webcam_running = True
